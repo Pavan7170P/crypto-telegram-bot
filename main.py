@@ -22,11 +22,11 @@ SYMBOL_MAP = {
     "matic": "matic-network"
 }
 
-# ✅ /start
+
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("👋 Hi! Use /price bitcoin, /convert btc to usd, or /top")
 
-# ✅ /help
+
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "📌 Commands:\n"
@@ -37,7 +37,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "ℹ️ Example: /price eth"
     )
 
-# ✅ /price
+
 async def price(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if context.args:
         symbol = context.args[0].lower()
@@ -53,7 +53,7 @@ async def price(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         await update.message.reply_text("ℹ️ Usage: /price bitcoin")
 
-# ✅ /convert btc to usd
+
 async def convert(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if len(context.args) == 3 and context.args[1].lower() == "to":
         from_coin = SYMBOL_MAP.get(context.args[0].lower(), context.args[0].lower())
@@ -69,7 +69,7 @@ async def convert(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         await update.message.reply_text("Usage: /convert btc to usd")
         
-# ✅ /top
+
 async def top(update: Update, context: ContextTypes.DEFAULT_TYPE):
     url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=5&page=1"
     try:
@@ -81,7 +81,7 @@ async def top(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except:
         await update.message.reply_text("❌ Couldn't fetch top coins.")
 
-# ✅ Main
+
 def main():
     app = ApplicationBuilder().token(TOKEN).build()
 
